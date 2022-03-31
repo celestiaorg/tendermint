@@ -18,12 +18,19 @@ install() {
     mv bin/tendermint bin/tendermint-"$vers"
 }
 
-transaction() {
+put_transaction() {
     local key="$1"
     local val="$2"
     diag ":: adding transaction $key = $val"
     curl --fail-with-body -s "http://$addr/broadcast_tx_commit?tx=\"${key}=${val}\"" \
-	    | jq -r .result.hash
+	| jq -r .result.hash
+}
+
+get_transaction() {
+    local hash="$1"
+    diag "Looking up transaction for hash $hash"
+    curl --fail-with-body -s "http://$addr/tx?hash=0x$hash" \
+	| jq -r '.result.tx|@base64d'
 }
 
 diag() { echo "-- $@" 1>&2; }
@@ -42,14 +49,21 @@ rm -fr -- "$tmhome"
 		 --consensus.create_empty_blocks=0 2>/dev/null 1>&2 &
 sleep 2
 
-hash1="$(transaction t1 alpha)"
+diag "Adding transactions..."
+hash1="$(put_transaction t1 alpha)"
 diag ":: transaction hash is $hash1"
-hash2="$(transaction t2 bravo)"
+hash2="$(put_transaction t2 bravo)"
 diag ":: transaction hash is $hash2"
-hash3="$(transaction t3 charlie)"
+hash3="$(put_transaction t3 charlie)"
 diag ":: transaction hash is $hash3"
 
 sleep 5
+
+diag "Checking transactions..."
+for h in "$hash1" "$hash2" "$hash3" ; do
+    diag ":: hash $h: " "$(get_transaction "$h")"
+done
+
 diag "Stopping TM $oldvers"
 kill %1; wait
 
