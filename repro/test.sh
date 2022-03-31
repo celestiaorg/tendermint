@@ -18,19 +18,23 @@ install() {
     mv bin/tendermint bin/tendermint-"$vers"
 }
 
+call() {
+    local method="$1"
+    shift 1
+    curl --fail-with-body -s "http://$addr/$method?$@"
+}
+
 put_transaction() {
     local key="$1"
     local val="$2"
     diag ":: adding transaction $key = $val"
-    curl --fail-with-body -s "http://$addr/broadcast_tx_commit?tx=\"${key}=${val}\"" \
-	| jq -r .result.hash
+    call broadcast_tx_commit "tx=\"${key}=${val}\"" | jq -r .result.hash
 }
 
 get_transaction() {
     local hash="$1"
     diag "Looking up transaction for hash $hash"
-    curl --fail-with-body -s "http://$addr/tx?hash=0x$hash" \
-	| jq -r '.result.tx|@base64d'
+    call tx "hash=0x${hash}" | jq -r '.result.tx|@base64d'
 }
 
 diag() { echo "-- $@" 1>&2; }
@@ -57,12 +61,13 @@ diag ":: transaction hash is $hash2"
 hash3="$(put_transaction t3 charlie)"
 diag ":: transaction hash is $hash3"
 
-sleep 5
 
 diag "Checking transactions..."
 for h in "$hash1" "$hash2" "$hash3" ; do
     diag ":: hash $h: " "$(get_transaction "$h")"
 done
+
+diag "Height now:" "$(call blockchain | jq -r .result.last_height)"
 
 diag "Stopping TM $oldvers"
 kill %1; wait
