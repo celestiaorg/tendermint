@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"regexp"
@@ -40,17 +41,47 @@ func main() {
 		log.Fatalf("Open output: %v", err)
 	}
 	defer out.Cancel()
+}
 
-	// A buffer of recent line comments. When we find a section, any comments in
-	// the buffer are attributed to the section. Comments before a blank line or
-	// the end of file are not attributed.
-	var com []string
+type chunk struct {
+	Comment []string // comment lines, including "#" prefixes
+	Header  string   // table or array header, including [brackets].
+	Items   []*item  // key-value items
+}
 
-	sc := bufio.NewScanner(in)
+type item struct {
+	Comment []string // comment lines, including "#" prefixes
+	Key     string   // item key
+	Value   string   // item value, unparsed (may be multiple lines)
+}
+
+var (
+	// The beginning of a key-value expression: key = ... EOL
+	// Match 1 is the key, match 2 is the value prefix.
+	keyVal = regexp.MustCompile(`\s*([.\w]+)\s*=\s*(.*)$`)
+
+	// A table heading.
+)
+
+// parseConfig loosely parses a TOML configuration file into chunks.  The parse
+// does not understand the TOML value grammar, only the top-level structure of
+// comments, key-value assignments, and table headings.
+func parseConfig(r io.Reader) ([]*chunk, error) {
+	var chunks []*chunk
+
+	sc := bufio.NewScanner(r)
+
+	var comment []string
+	curChunk := new(chunk)
+	curItem := new(item)
 	for sc.Scan() {
-		line := sc.Text()
+		line := sc.Text() // without EOL
+
 		if t := strings.TrimSpace(line); t == "" {
-			// Blank line: Emit any buffered comments, followed by the line.
+			// Blank line:
+		}
+		if true {
+			// Blank line: Emit any buffered comments
 			if len(com) != 0 {
 				fmt.Fprintln(out, strings.Join(com, "\n"))
 				com = nil
@@ -76,16 +107,5 @@ func main() {
 			fmt.Fprintln(out, line) // copy intact
 		}
 	}
-	if err := sc.Err(); err != nil {
-		log.Fatalf("Scanning input: %v", err)
-	}
-
-	// Flush out any remaining buffered comment lines.
-	if len(com) != 0 {
-		fmt.Fprintln(out, strings.Join(com, "\n"))
-	}
-
-	if err := out.Close(); err != nil {
-		log.Fatalf("Closing output: %v", err)
-	}
+	return chunks, sc.Err()
 }
