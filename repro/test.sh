@@ -4,7 +4,7 @@ set -euo pipefail
 readonly root="$(dirname $0)"
 cd "$root"
 
-readonly oldvers=v0.34.15
+readonly oldvers=v0.34.17
 readonly newvers=v0.35.x
 readonly addr=localhost:26657
 readonly tmhome="$PWD/tmhome"
