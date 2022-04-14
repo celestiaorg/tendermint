@@ -79,6 +79,7 @@ message RequestBeginBlock {
   tendermint.types.Header header               = 2 [(gogoproto.nullable) = false];
   LastCommitInfo          last_commit_info     = 3 [(gogoproto.nullable) = false];
   repeated Evidence       byzantine_validators = 4 [(gogoproto.nullable) = false];
+  bytes                   isr = 5;
 }
 
 enum CheckTxType {
@@ -93,10 +94,12 @@ message RequestCheckTx {
 
 message RequestDeliverTx {
   bytes tx = 1;
+  bytes isr = 2;
 }
 
 message RequestEndBlock {
   int64 height = 1;
+  bytes isr = 2;
 }
 
 message RequestCommit {}
