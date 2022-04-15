@@ -20,6 +20,8 @@ type AppConnConsensus interface {
 	DeliverTxAsync(types.RequestDeliverTx) *abcicli.ReqRes
 	EndBlockSync(types.RequestEndBlock) (*types.ResponseEndBlock, error)
 	CommitSync() (*types.ResponseCommit, error)
+	GenerateFraudProofSync(types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error)
+	VerifyFraudProofSync(types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error)
 }
 
 type AppConnMempool interface {
@@ -91,6 +93,14 @@ func (app *appConnConsensus) EndBlockSync(req types.RequestEndBlock) (*types.Res
 
 func (app *appConnConsensus) CommitSync() (*types.ResponseCommit, error) {
 	return app.appConn.CommitSync()
+}
+
+func (app *appConnConsensus) GenerateFraudProofSync(req types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error) {
+	return app.appConn.GenerateFraudProofSync(req)
+}
+
+func (app *appConnConsensus) VerifyFraudProofSync(req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	return app.appConn.VerifyFraudProofSync(req)
 }
 
 //------------------------------------------------

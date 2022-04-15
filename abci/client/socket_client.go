@@ -279,6 +279,14 @@ func (cli *socketClient) ApplySnapshotChunkAsync(req types.RequestApplySnapshotC
 	return cli.queueRequest(types.ToRequestApplySnapshotChunk(req))
 }
 
+func (cli *socketClient) GenerateFraudProofAsync(req types.RequestGenerateFraudProof) *ReqRes {
+	return cli.queueRequest(types.ToRequestGenerateFraudProof(req))
+}
+
+func (cli *socketClient) VerifyFraudProofAsync(req types.RequestVerifyFraudProof) *ReqRes {
+	return cli.queueRequest(types.ToRequestVerifyFraudProof(req))
+}
+
 //----------------------------------------
 
 func (cli *socketClient) FlushSync() error {
@@ -415,6 +423,24 @@ func (cli *socketClient) ApplySnapshotChunkSync(
 		return nil, err
 	}
 	return reqres.Response.GetApplySnapshotChunk(), cli.Error()
+}
+
+func (cli *socketClient) GenerateFraudProofSync(
+	req types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error) {
+	reqres := cli.queueRequest(types.ToRequestGenerateFraudProof(req))
+	if err := cli.FlushSync(); err != nil {
+		return nil, err
+	}
+	return reqres.Response.GetGenerateFraudProof(), cli.Error()
+}
+
+func (cli *socketClient) VerifyFraudProofSync(
+	req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	reqres := cli.queueRequest(types.ToRequestVerifyFraudProof(req))
+	if err := cli.FlushSync(); err != nil {
+		return nil, err
+	}
+	return reqres.Response.GetVerifyFraudProof(), cli.Error()
 }
 
 //----------------------------------------

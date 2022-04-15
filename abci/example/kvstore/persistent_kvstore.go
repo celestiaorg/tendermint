@@ -170,6 +170,16 @@ func (app *PersistentKVStoreApplication) ApplySnapshotChunk(
 	return types.ResponseApplySnapshotChunk{Result: types.ResponseApplySnapshotChunk_ABORT}
 }
 
+func (app *PersistentKVStoreApplication) GenerateFraudProof(
+	req types.RequestGenerateFraudProof) types.ResponseGenerateFraudProof {
+	return types.ResponseGenerateFraudProof{}
+}
+
+func (app *PersistentKVStoreApplication) VerifyFraudProof(
+	req types.RequestVerifyFraudProof) types.ResponseVerifyFraudProof {
+	return types.ResponseVerifyFraudProof{}
+}
+
 //---------------------------------------------
 // update validators
 

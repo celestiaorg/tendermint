@@ -36,6 +36,8 @@ message Request {
     RequestOfferSnapshot      offer_snapshot       = 13;
     RequestLoadSnapshotChunk  load_snapshot_chunk  = 14;
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
+    RequestGenerateFraudProof generate_fraud_proof = 16;
+    RequestVerifyFraudProof   verify_fraud_proof   = 17;
   }
 }
 
@@ -128,6 +130,16 @@ message RequestApplySnapshotChunk {
   string sender = 3;
 }
 
+// Generates a fraud proof
+message RequestGenerateFraudProof {
+  bytes tx = 1;
+}
+
+// Verifies a fraud proof
+message RequestVerifyFraudProof {
+  FraudProof  fraud_proof = 1;
+}
+
 //----------------------------------------
 // Response types
 
@@ -149,6 +161,8 @@ message Response {
     ResponseOfferSnapshot      offer_snapshot       = 14;
     ResponseLoadSnapshotChunk  load_snapshot_chunk  = 15;
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
+    ResponseGenerateFraudProof generate_fraud_proof = 17;
+    ResponseVerifyFraudProof   verify_fraud_proof   = 18;
   }
 }
 
@@ -279,6 +293,15 @@ message ResponseApplySnapshotChunk {
   }
 }
 
+
+message ResponseGenerateFraudProof {
+  FraudProof fraud_proof = 1; // Generated fraud proof
+}
+
+message ResponseVerifyFraudProof {
+  bool is_fraud_proof_valid = 1; 
+}
+
 //----------------------------------------
 // Misc.
 
@@ -388,6 +411,19 @@ message Snapshot {
   bytes  metadata = 5;  // Arbitrary application metadata
 }
 
+message FraudProof {
+  bytes pre_isr = 1;
+  bytes post_isr = 2;
+  repeated StateWitness state_witnesses = 3;
+}
+
+message StateWitness {
+  bytes key = 1;
+  bytes value = 2;
+  tendermint.crypto.ProofOps proof_ops = 3;
+
+}
+
 //----------------------------------------
 // Service Definition
 
@@ -407,4 +443,6 @@ service ABCIApplication {
   rpc OfferSnapshot(RequestOfferSnapshot) returns (ResponseOfferSnapshot);
   rpc LoadSnapshotChunk(RequestLoadSnapshotChunk) returns (ResponseLoadSnapshotChunk);
   rpc ApplySnapshotChunk(RequestApplySnapshotChunk) returns (ResponseApplySnapshotChunk);
+  rpc GenerateFraudProof(RequestGenerateFraudProof) returns (ResponseGenerateFraudProof);
+  rpc VerifyFraudProof(RequestVerifyFraudProof) returns (ResponseVerifyFraudProof);
 }
