@@ -36,6 +36,9 @@ message Request {
     RequestOfferSnapshot      offer_snapshot       = 13;
     RequestLoadSnapshotChunk  load_snapshot_chunk  = 14;
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
+    RequestGetAppHash         get_app_hash         = 16;
+    RequestGenerateFraudProof generate_fraud_proof = 17;
+    RequestTriggerFraudProofGenerationMode trigger_fraud_proof_generation_mode = 18;
   }
 }
 
@@ -125,6 +128,15 @@ message RequestApplySnapshotChunk {
   string sender = 3;
 }
 
+// Gets the current appHash
+message RequestGetAppHash {}
+
+// Generates a fraud proof
+message RequestGenerateFraudProof {}
+
+// Triggers fraud proof generation mode
+message RequestTriggerFraudProofGenerationMode {}
+
 //----------------------------------------
 // Response types
 
@@ -146,6 +158,9 @@ message Response {
     ResponseOfferSnapshot      offer_snapshot       = 14;
     ResponseLoadSnapshotChunk  load_snapshot_chunk  = 15;
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
+    ResponseGetAppHash         get_app_hash         = 17;
+    ResponseGenerateFraudProof generate_fraud_proof = 18;
+    ResponseTriggerFraudProofGenerationMode trigger_fraud_proof_generation_mode = 19;
   }
 }
 
@@ -276,6 +291,18 @@ message ResponseApplySnapshotChunk {
   }
 }
 
+message ResponseGetAppHash {
+  bytes app_hash = 1;
+}
+
+message ResponseGenerateFraudProof {
+  FraudProof fraudProof = 1;
+}
+
+message ResponseTriggerFraudProofGenerationMode {
+  bool success = 1;
+}
+
 //----------------------------------------
 // Misc.
 
@@ -385,6 +412,30 @@ message Snapshot {
   bytes  metadata = 5;  // Arbitrary application metadata
 }
 
+// Represents a single-round fraudProof
+message FraudProof {
+  int64 block_height = 1;
+  bytes appHash = 2;
+  map<string, StateWitness> stateWitness = 3;
+}
+
+// State witness with a list of all witness data
+message StateWitness {
+  // store level proof
+  tendermint.crypto.ProofOp proof_op = 1;
+  // substore level hash
+  bytes rootHash = 2;
+  // List of witness data
+  repeated WitnessData witnessData = 3;
+}
+
+// Witness data containing a key/value pair and a SMT proof for said key/value pair
+message WitnessData {
+  bytes key = 1;
+  bytes value = 2;
+  tendermint.crypto.ProofOp proof = 3;
+}
+
 //----------------------------------------
 // Service Definition
 
@@ -404,4 +455,7 @@ service ABCIApplication {
   rpc OfferSnapshot(RequestOfferSnapshot) returns (ResponseOfferSnapshot);
   rpc LoadSnapshotChunk(RequestLoadSnapshotChunk) returns (ResponseLoadSnapshotChunk);
   rpc ApplySnapshotChunk(RequestApplySnapshotChunk) returns (ResponseApplySnapshotChunk);
+  rpc GetAppHash(RequestGetAppHash) returns (ResponseGetAppHash);
+  rpc GenerateFraudProof(RequestGenerateFraudProof) returns (ResponseGenerateFraudProof);
+  rpc TriggerFraudProofGenerationMode(RequestTriggerFraudProofGenerationMode) returns (ResponseTriggerFraudProofGenerationMode);
 }

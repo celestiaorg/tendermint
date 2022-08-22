@@ -18,11 +18,14 @@ type Application interface {
 	CheckTx(RequestCheckTx) ResponseCheckTx // Validate a tx for the mempool
 
 	// Consensus Connection
-	InitChain(RequestInitChain) ResponseInitChain    // Initialize blockchain w validators/other info from TendermintCore
-	BeginBlock(RequestBeginBlock) ResponseBeginBlock // Signals the beginning of a block
-	DeliverTx(RequestDeliverTx) ResponseDeliverTx    // Deliver a tx for full processing
-	EndBlock(RequestEndBlock) ResponseEndBlock       // Signals the end of a block, returns changes to the validator set
-	Commit() ResponseCommit                          // Commit the state and return the application Merkle root hash
+	InitChain(RequestInitChain) ResponseInitChain                                                                   // Initialize blockchain w validators/other info from TendermintCore
+	BeginBlock(RequestBeginBlock) ResponseBeginBlock                                                                // Signals the beginning of a block
+	DeliverTx(RequestDeliverTx) ResponseDeliverTx                                                                   // Deliver a tx for full processing
+	EndBlock(RequestEndBlock) ResponseEndBlock                                                                      // Signals the end of a block, returns changes to the validator set
+	Commit() ResponseCommit                                                                                         // Commit the state and return the application Merkle root hash
+	GetAppHash(RequestGetAppHash) ResponseGetAppHash                                                                // Get appHash
+	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof                                        // Generate FraudProof
+	TriggerFraudProofGenerationMode(RequestTriggerFraudProofGenerationMode) ResponseTriggerFraudProofGenerationMode // Trigger Fraud Proof Generation Mode
 
 	// State Sync Connection
 	ListSnapshots(RequestListSnapshots) ResponseListSnapshots                // List available snapshots
@@ -93,6 +96,18 @@ func (BaseApplication) LoadSnapshotChunk(req RequestLoadSnapshotChunk) ResponseL
 
 func (BaseApplication) ApplySnapshotChunk(req RequestApplySnapshotChunk) ResponseApplySnapshotChunk {
 	return ResponseApplySnapshotChunk{}
+}
+
+func (BaseApplication) GetAppHash(req RequestGetAppHash) ResponseGetAppHash {
+	return ResponseGetAppHash{}
+}
+
+func (BaseApplication) GenerateFraudProof(req RequestGenerateFraudProof) ResponseGenerateFraudProof {
+	return ResponseGenerateFraudProof{}
+}
+
+func (BaseApplication) TriggerFraudProofGenerationMode(req RequestTriggerFraudProofGenerationMode) ResponseTriggerFraudProofGenerationMode {
+	return ResponseTriggerFraudProofGenerationMode{}
 }
 
 //-------------------------------------------------------
@@ -180,5 +195,23 @@ func (app *GRPCApplication) LoadSnapshotChunk(
 func (app *GRPCApplication) ApplySnapshotChunk(
 	ctx context.Context, req *RequestApplySnapshotChunk) (*ResponseApplySnapshotChunk, error) {
 	res := app.app.ApplySnapshotChunk(*req)
+	return &res, nil
+}
+
+func (app *GRPCApplication) GetAppHash(
+	ctx context.Context, req *RequestGetAppHash) (*ResponseGetAppHash, error) {
+	res := app.app.GetAppHash(*req)
+	return &res, nil
+}
+
+func (app *GRPCApplication) GenerateFraudProof(
+	ctx context.Context, req *RequestGenerateFraudProof) (*ResponseGenerateFraudProof, error) {
+	res := app.app.GenerateFraudProof(*req)
+	return &res, nil
+}
+
+func (app *GRPCApplication) TriggerFraudProofGenerationMode(
+	ctx context.Context, req *RequestTriggerFraudProofGenerationMode) (*ResponseTriggerFraudProofGenerationMode, error) {
+	res := app.app.TriggerFraudProofGenerationMode(*req)
 	return &res, nil
 }

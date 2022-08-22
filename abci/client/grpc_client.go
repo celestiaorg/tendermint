@@ -302,6 +302,33 @@ func (cli *grpcClient) ApplySnapshotChunkAsync(params types.RequestApplySnapshot
 	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_ApplySnapshotChunk{ApplySnapshotChunk: res}})
 }
 
+func (cli *grpcClient) GetAppHashAsync(params types.RequestGetAppHash) *ReqRes {
+	req := types.ToRequestGetAppHash(params)
+	res, err := cli.client.GetAppHash(context.Background(), req.GetGetAppHash(), grpc.WaitForReady(true))
+	if err != nil {
+		cli.StopForError(err)
+	}
+	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_GetAppHash{GetAppHash: res}})
+}
+
+func (cli *grpcClient) GenerateFraudProofAsync(params types.RequestGenerateFraudProof) *ReqRes {
+	req := types.ToRequestGenerateFraudProof(params)
+	res, err := cli.client.GenerateFraudProof(context.Background(), req.GetGenerateFraudProof(), grpc.WaitForReady(true))
+	if err != nil {
+		cli.StopForError(err)
+	}
+	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_GenerateFraudProof{GenerateFraudProof: res}})
+}
+
+func (cli *grpcClient) TriggerFraudProofGenerationModeAsync(params types.RequestTriggerFraudProofGenerationMode) *ReqRes {
+	req := types.ToRequestTriggerFraudProofGenerationMode(params)
+	res, err := cli.client.TriggerFraudProofGenerationMode(context.Background(), req.GetTriggerFraudProofGenerationMode(), grpc.WaitForReady(true))
+	if err != nil {
+		cli.StopForError(err)
+	}
+	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_TriggerFraudProofGenerationMode{TriggerFraudProofGenerationMode: res}})
+}
+
 // finishAsyncCall creates a ReqRes for an async call, and immediately populates it
 // with the response. We don't complete it until it's been ordered via the channel.
 func (cli *grpcClient) finishAsyncCall(req *types.Request, res *types.Response) *ReqRes {
@@ -416,4 +443,22 @@ func (cli *grpcClient) ApplySnapshotChunkSync(
 	params types.RequestApplySnapshotChunk) (*types.ResponseApplySnapshotChunk, error) {
 	reqres := cli.ApplySnapshotChunkAsync(params)
 	return cli.finishSyncCall(reqres).GetApplySnapshotChunk(), cli.Error()
+}
+
+func (cli *grpcClient) GetAppHashSync(
+	params types.RequestGetAppHash) (*types.ResponseGetAppHash, error) {
+	reqres := cli.GetAppHashAsync(params)
+	return cli.finishSyncCall(reqres).GetGetAppHash(), cli.Error()
+}
+
+func (cli *grpcClient) GenerateFraudProofSync(
+	params types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error) {
+	reqres := cli.GenerateFraudProofAsync(params)
+	return cli.finishSyncCall(reqres).GetGenerateFraudProof(), cli.Error()
+}
+
+func (cli *grpcClient) TriggerFraudProofGenerationModeSync(
+	params types.RequestTriggerFraudProofGenerationMode) (*types.ResponseTriggerFraudProofGenerationMode, error) {
+	reqres := cli.TriggerFraudProofGenerationModeAsync(params)
+	return cli.finishSyncCall(reqres).GetTriggerFraudProofGenerationMode(), cli.Error()
 }
