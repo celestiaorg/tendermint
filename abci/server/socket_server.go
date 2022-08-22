@@ -236,6 +236,15 @@ func (s *SocketServer) handleRequest(req *types.Request, responses chan<- *types
 	case *types.Request_ApplySnapshotChunk:
 		res := s.app.ApplySnapshotChunk(*r.ApplySnapshotChunk)
 		responses <- types.ToResponseApplySnapshotChunk(res)
+	case *types.Request_GetAppHash:
+		res := s.app.GetAppHash(*r.GetAppHash)
+		responses <- types.ToResponseGetAppHash(res)
+	case *types.Request_GenerateFraudProof:
+		res := s.app.GenerateFraudProof(*r.GenerateFraudProof)
+		responses <- types.ToResponseGenerateFraudProof(res)
+	case *types.Request_TriggerFraudProofGenerationMode:
+		res := s.app.TriggerFraudProofGenerationMode(*r.TriggerFraudProofGenerationMode)
+		responses <- types.ToResponseGenerateFraudProof(res)
 	default:
 		responses <- types.ToResponseException("Unknown request")
 	}
