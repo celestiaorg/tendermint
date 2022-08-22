@@ -207,6 +207,17 @@ func (app *localClient) ApplySnapshotChunkAsync(req types.RequestApplySnapshotCh
 	)
 }
 
+func (app *localClient) GetAppHashAsync(req types.RequestGetAppHash) *ReqRes {
+	app.mtx.Lock()
+	defer app.mtx.Unlock()
+
+	res := app.Application.GetAppHash(req)
+	return app.callback(
+		types.ToRequestGetAppHash(req),
+		types.ToResponseGetAppHash(res),
+	)
+}
+
 //-------------------------------------------------------
 
 func (app *localClient) FlushSync() error {
@@ -320,6 +331,15 @@ func (app *localClient) ApplySnapshotChunkSync(
 	defer app.mtx.Unlock()
 
 	res := app.Application.ApplySnapshotChunk(req)
+	return &res, nil
+}
+
+func (app *localClient) GetAppHashSync(
+	req types.RequestGetAppHash) (*types.ResponseGetAppHash, error) {
+	app.mtx.Lock()
+	defer app.mtx.Unlock()
+
+	res := app.Application.GetAppHash(req)
 	return &res, nil
 }
 

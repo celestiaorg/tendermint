@@ -36,6 +36,7 @@ message Request {
     RequestOfferSnapshot      offer_snapshot       = 13;
     RequestLoadSnapshotChunk  load_snapshot_chunk  = 14;
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
+    RequestGetAppHash         get_app_hash         = 16;
   }
 }
 
@@ -125,6 +126,9 @@ message RequestApplySnapshotChunk {
   string sender = 3;
 }
 
+// Gets the current appHash
+message RequestGetAppHash {}
+
 //----------------------------------------
 // Response types
 
@@ -146,6 +150,7 @@ message Response {
     ResponseOfferSnapshot      offer_snapshot       = 14;
     ResponseLoadSnapshotChunk  load_snapshot_chunk  = 15;
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
+    ResponseGetAppHash         get_app_hash         = 17;
   }
 }
 
@@ -276,6 +281,10 @@ message ResponseApplySnapshotChunk {
   }
 }
 
+message ResponseGetAppHash {
+  bytes app_hash = 1;
+}
+
 //----------------------------------------
 // Misc.
 
@@ -404,4 +413,5 @@ service ABCIApplication {
   rpc OfferSnapshot(RequestOfferSnapshot) returns (ResponseOfferSnapshot);
   rpc LoadSnapshotChunk(RequestLoadSnapshotChunk) returns (ResponseLoadSnapshotChunk);
   rpc ApplySnapshotChunk(RequestApplySnapshotChunk) returns (ResponseApplySnapshotChunk);
+  rpc GetAppHash(RequestGetAppHash) returns (ResponseGetAppHash);
 }

@@ -170,6 +170,11 @@ func (app *PersistentKVStoreApplication) ApplySnapshotChunk(
 	return types.ResponseApplySnapshotChunk{Result: types.ResponseApplySnapshotChunk_ABORT}
 }
 
+func (app *PersistentKVStoreApplication) GetAppHash(
+	req types.RequestGetAppHash) types.ResponseGetAppHash {
+	return types.ResponseGetAppHash{}
+}
+
 //---------------------------------------------
 // update validators
 

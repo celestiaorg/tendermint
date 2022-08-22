@@ -279,6 +279,10 @@ func (cli *socketClient) ApplySnapshotChunkAsync(req types.RequestApplySnapshotC
 	return cli.queueRequest(types.ToRequestApplySnapshotChunk(req))
 }
 
+func (cli *socketClient) GetAppHashAsync(req types.RequestGetAppHash) *ReqRes {
+	return cli.queueRequest(types.ToRequestGetAppHash(req))
+}
+
 //----------------------------------------
 
 func (cli *socketClient) FlushSync() error {
@@ -415,6 +419,15 @@ func (cli *socketClient) ApplySnapshotChunkSync(
 		return nil, err
 	}
 	return reqres.Response.GetApplySnapshotChunk(), cli.Error()
+}
+
+func (cli *socketClient) GetAppHashSync(
+	req types.RequestGetAppHash) (*types.ResponseGetAppHash, error) {
+	reqres := cli.queueRequest(types.ToRequestGetAppHash(req))
+	if err := cli.FlushSync(); err != nil {
+		return nil, err
+	}
+	return reqres.Response.GetGetAppHash(), cli.Error()
 }
 
 //----------------------------------------
