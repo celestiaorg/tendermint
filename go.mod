@@ -44,7 +44,7 @@ require (
 require (
 	github.com/bufbuild/buf v1.7.0
 	github.com/creachadair/taskgroup v0.3.2
-	github.com/golangci/golangci-lint v1.48.0
+	github.com/golangci/golangci-lint v1.42.1
 	github.com/prometheus/common v0.34.0 // indirect
 	github.com/syndtr/goleveldb v1.0.1-0.20200815110645-5c35d600f0ca
 	github.com/vektra/mockery/v2 v2.14.0
@@ -83,7 +83,7 @@ require (
 	github.com/containerd/typeurl v1.0.2 // indirect
 	github.com/cosmos/go-bip39 v0.0.0-20180819234021-555e2067c45d // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
-	github.com/daixiang0/gci v0.6.2 // indirect
+	github.com/daixiang0/gci v0.2.9 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/denis-tingaikin/go-header v0.4.3 // indirect
 	github.com/dgraph-io/badger/v2 v2.2007.2 // indirect
@@ -251,7 +251,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12 // indirect
 	google.golang.org/genproto v0.0.0-20220725144611-272f38e5d71b // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/ini.v1 v1.66.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
