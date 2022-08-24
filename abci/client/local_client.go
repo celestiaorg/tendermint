@@ -229,17 +229,6 @@ func (app *localClient) GenerateFraudProofAsync(req types.RequestGenerateFraudPr
 	)
 }
 
-func (app *localClient) TriggerFraudProofGenerationModeAsync(req types.RequestTriggerFraudProofGenerationMode) *ReqRes {
-	app.mtx.Lock()
-	defer app.mtx.Unlock()
-
-	res := app.Application.TriggerFraudProofGenerationMode(req)
-	return app.callback(
-		types.ToRequestTriggerFraudProofGenerationMode(req),
-		types.ToResponseTriggerFraudProofGenerationMode(res),
-	)
-}
-
 //-------------------------------------------------------
 
 func (app *localClient) FlushSync() error {
@@ -371,15 +360,6 @@ func (app *localClient) GenerateFraudProofSync(
 	defer app.mtx.Unlock()
 
 	res := app.Application.GenerateFraudProof(req)
-	return &res, nil
-}
-
-func (app *localClient) TriggerFraudProofGenerationModeSync(
-	req types.RequestTriggerFraudProofGenerationMode) (*types.ResponseTriggerFraudProofGenerationMode, error) {
-	app.mtx.Lock()
-	defer app.mtx.Unlock()
-
-	res := app.Application.TriggerFraudProofGenerationMode(req)
 	return &res, nil
 }
 

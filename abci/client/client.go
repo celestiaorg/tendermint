@@ -58,9 +58,6 @@ type Client interface {
 	ApplySnapshotChunkSync(types.RequestApplySnapshotChunk) (*types.ResponseApplySnapshotChunk, error)
 	GetAppHashSync(types.RequestGetAppHash) (*types.ResponseGetAppHash, error)
 	GenerateFraudProofSync(types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error)
-	TriggerFraudProofGenerationModeSync(
-		types.RequestTriggerFraudProofGenerationMode,
-	) (*types.ResponseTriggerFraudProofGenerationMode, error)
 }
 
 //----------------------------------------

@@ -18,23 +18,13 @@ type Application interface {
 	CheckTx(RequestCheckTx) ResponseCheckTx // Validate a tx for the mempool
 
 	// Consensus Connection
-
-	// Initialize blockchain w validators/other info from TendermintCore
-	InitChain(RequestInitChain) ResponseInitChain
-	// Signals the beginning of a block
-	BeginBlock(RequestBeginBlock) ResponseBeginBlock
-	// Deliver a tx for full processing
-	DeliverTx(RequestDeliverTx) ResponseDeliverTx
-	// Signals the end of a block, returns changes to the validator set
-	EndBlock(RequestEndBlock) ResponseEndBlock
-	// Commit the state and return the application Merkle root hash
-	Commit() ResponseCommit
-	// Get appHash
-	GetAppHash(RequestGetAppHash) ResponseGetAppHash
-	// Generate FraudProof
-	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof
-	// Trigger Fraud Proof Generation Mode
-	TriggerFraudProofGenerationMode(RequestTriggerFraudProofGenerationMode) ResponseTriggerFraudProofGenerationMode
+	InitChain(RequestInitChain) ResponseInitChain                            // Initialize blockchain w validators/other info from TendermintCore
+	BeginBlock(RequestBeginBlock) ResponseBeginBlock                         // Signals the beginning of a block
+	DeliverTx(RequestDeliverTx) ResponseDeliverTx                            // Deliver a tx for full processing
+	EndBlock(RequestEndBlock) ResponseEndBlock                               // Signals the end of a block, returns changes to the validator set
+	Commit() ResponseCommit                                                  // Commit the state and return the application Merkle root hash
+	GetAppHash(RequestGetAppHash) ResponseGetAppHash                         // Get appHash
+	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof // Generate FraudProof
 
 	// State Sync Connection
 	ListSnapshots(RequestListSnapshots) ResponseListSnapshots                // List available snapshots
@@ -113,11 +103,6 @@ func (BaseApplication) GetAppHash(req RequestGetAppHash) ResponseGetAppHash {
 
 func (BaseApplication) GenerateFraudProof(req RequestGenerateFraudProof) ResponseGenerateFraudProof {
 	return ResponseGenerateFraudProof{}
-}
-
-func (BaseApplication) TriggerFraudProofGenerationMode(
-	req RequestTriggerFraudProofGenerationMode) ResponseTriggerFraudProofGenerationMode {
-	return ResponseTriggerFraudProofGenerationMode{}
 }
 
 //-------------------------------------------------------
@@ -217,11 +202,5 @@ func (app *GRPCApplication) GetAppHash(
 func (app *GRPCApplication) GenerateFraudProof(
 	ctx context.Context, req *RequestGenerateFraudProof) (*ResponseGenerateFraudProof, error) {
 	res := app.app.GenerateFraudProof(*req)
-	return &res, nil
-}
-
-func (app *GRPCApplication) TriggerFraudProofGenerationMode(
-	ctx context.Context, req *RequestTriggerFraudProofGenerationMode) (*ResponseTriggerFraudProofGenerationMode, error) {
-	res := app.app.TriggerFraudProofGenerationMode(*req)
 	return &res, nil
 }

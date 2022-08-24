@@ -289,12 +289,6 @@ func (cli *socketClient) GenerateFraudProofAsync(
 	return cli.queueRequest(types.ToRequestGenerateFraudProof(req))
 }
 
-func (cli *socketClient) TriggerFraudProofGenerationModeAsync(
-	req types.RequestTriggerFraudProofGenerationMode,
-) *ReqRes {
-	return cli.queueRequest(types.ToRequestTriggerFraudProofGenerationMode(req))
-}
-
 //----------------------------------------
 
 func (cli *socketClient) FlushSync() error {
@@ -449,15 +443,6 @@ func (cli *socketClient) GenerateFraudProofSync(
 		return nil, err
 	}
 	return reqres.Response.GetGenerateFraudProof(), cli.Error()
-}
-
-func (cli *socketClient) TriggerFraudProofGenerationModeSync(
-	req types.RequestTriggerFraudProofGenerationMode) (*types.ResponseTriggerFraudProofGenerationMode, error) {
-	reqres := cli.queueRequest(types.ToRequestTriggerFraudProofGenerationMode(req))
-	if err := cli.FlushSync(); err != nil {
-		return nil, err
-	}
-	return reqres.Response.GetTriggerFraudProofGenerationMode(), cli.Error()
 }
 
 //----------------------------------------

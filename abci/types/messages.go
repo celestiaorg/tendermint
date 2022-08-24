@@ -171,12 +171,6 @@ func ToRequestGenerateFraudProof(req RequestGenerateFraudProof) *Request {
 	}
 }
 
-func ToRequestTriggerFraudProofGenerationMode(req RequestTriggerFraudProofGenerationMode) *Request {
-	return &Request{
-		Value: &Request_TriggerFraudProofGenerationMode{&req},
-	}
-}
-
 //----------------------------------------
 
 func ToResponseException(errStr string) *Response {
@@ -284,11 +278,5 @@ func ToResponseGetAppHash(res ResponseGetAppHash) *Response {
 func ToResponseGenerateFraudProof(res ResponseGenerateFraudProof) *Response {
 	return &Response{
 		Value: &Response_GenerateFraudProof{&res},
-	}
-}
-
-func ToResponseTriggerFraudProofGenerationMode(res ResponseTriggerFraudProofGenerationMode) *Response {
-	return &Response{
-		Value: &Response_TriggerFraudProofGenerationMode{&res},
 	}
 }

@@ -38,7 +38,6 @@ message Request {
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
     RequestGetAppHash         get_app_hash         = 16;
     RequestGenerateFraudProof generate_fraud_proof = 17;
-    RequestTriggerFraudProofGenerationMode trigger_fraud_proof_generation_mode = 18;
   }
 }
 
@@ -131,10 +130,9 @@ message RequestApplySnapshotChunk {
 message RequestGetAppHash {}
 
 // Generates a fraud proof
-message RequestGenerateFraudProof {}
-
-// Triggers fraud proof generation mode
-message RequestTriggerFraudProofGenerationMode {}
+message RequestGenerateFraudProof {
+  types.Data partial_block_data = 1;
+}
 
 //----------------------------------------
 // Response types
@@ -159,7 +157,6 @@ message Response {
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
     ResponseGetAppHash         get_app_hash         = 17;
     ResponseGenerateFraudProof generate_fraud_proof = 18;
-    ResponseTriggerFraudProofGenerationMode trigger_fraud_proof_generation_mode = 19;
   }
 }
 
@@ -303,10 +300,6 @@ message ResponseGetAppHash {
 
 message ResponseGenerateFraudProof {
   FraudProof fraud_proof = 1;
-}
-
-message ResponseTriggerFraudProofGenerationMode {
-  bool success = 1;
 }
 
 //----------------------------------------
@@ -463,5 +456,4 @@ service ABCIApplication {
       returns (ResponseApplySnapshotChunk);
   rpc GetAppHash(RequestGetAppHash) returns (ResponseGetAppHash);
   rpc GenerateFraudProof(RequestGenerateFraudProof) returns (ResponseGenerateFraudProof);
-  rpc TriggerFraudProofGenerationMode(RequestTriggerFraudProofGenerationMode) returns (ResponseTriggerFraudProofGenerationMode);
 }
