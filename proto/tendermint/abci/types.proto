@@ -135,6 +135,7 @@ message RequestGenerateFraudProof {
   RequestBeginBlock begin_block_request = 1 [(gogoproto.nullable) = false];
   repeated RequestDeliverTx deliver_tx_requests = 2;
   RequestEndBlock end_block_request = 3;
+  types.Data partial_block_data = 4;
 }
 
 // Verifies a fraud proof
