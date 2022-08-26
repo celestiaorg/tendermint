@@ -24,7 +24,8 @@ type Application interface {
 	EndBlock(RequestEndBlock) ResponseEndBlock                               // Signals the end of a block, returns changes to the validator set
 	Commit() ResponseCommit                                                  // Commit the state and return the application Merkle root hash
 	GetAppHash(RequestGetAppHash) ResponseGetAppHash                         // Get appHash
-	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof // Generate FraudProof
+	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof // Generate Fraud Proof
+	VerifyFraudProof(RequestVerifyFraudProof) ResponseVerifyFraudProof       // Verifies a Fraud Proof
 
 	// State Sync Connection
 	ListSnapshots(RequestListSnapshots) ResponseListSnapshots                // List available snapshots
@@ -103,6 +104,10 @@ func (BaseApplication) GetAppHash(req RequestGetAppHash) ResponseGetAppHash {
 
 func (BaseApplication) GenerateFraudProof(req RequestGenerateFraudProof) ResponseGenerateFraudProof {
 	return ResponseGenerateFraudProof{}
+}
+
+func (BaseApplication) VerifyFraudProof(req RequestVerifyFraudProof) ResponseVerifyFraudProof {
+	return ResponseVerifyFraudProof{}
 }
 
 //-------------------------------------------------------
@@ -202,5 +207,11 @@ func (app *GRPCApplication) GetAppHash(
 func (app *GRPCApplication) GenerateFraudProof(
 	ctx context.Context, req *RequestGenerateFraudProof) (*ResponseGenerateFraudProof, error) {
 	res := app.app.GenerateFraudProof(*req)
+	return &res, nil
+}
+
+func (app *GRPCApplication) VerifyFraudProof(
+	ctx context.Context, req *RequestVerifyFraudProof) (*ResponseVerifyFraudProof, error) {
+	res := app.app.VerifyFraudProof(*req)
 	return &res, nil
 }

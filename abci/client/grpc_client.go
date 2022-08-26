@@ -318,6 +318,15 @@ func (cli *grpcClient) GenerateFraudProofAsync(params types.RequestGenerateFraud
 	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_GenerateFraudProof{GenerateFraudProof: res}})
 }
 
+func (cli *grpcClient) VerifyFraudProofAsync(params types.RequestVerifyFraudProof) *ReqRes {
+	req := types.ToRequestVerifyFraudProof(params)
+	res, err := cli.client.VerifyFraudProof(context.Background(), req.GetVerifyFraudProof(), grpc.WaitForReady(true))
+	if err != nil {
+		cli.StopForError(err)
+	}
+	return cli.finishAsyncCall(req, &types.Response{Value: &types.Response_VerifyFraudProof{VerifyFraudProof: res}})
+}
+
 // finishAsyncCall creates a ReqRes for an async call, and immediately populates it
 // with the response. We don't complete it until it's been ordered via the channel.
 func (cli *grpcClient) finishAsyncCall(req *types.Request, res *types.Response) *ReqRes {
@@ -446,4 +455,10 @@ func (cli *grpcClient) GenerateFraudProofSync(
 	params types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error) {
 	reqres := cli.GenerateFraudProofAsync(params)
 	return cli.finishSyncCall(reqres).GetGenerateFraudProof(), cli.Error()
+}
+
+func (cli *grpcClient) VerifyFraudProofSync(
+	params types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	reqres := cli.VerifyFraudProofAsync(params)
+	return cli.finishSyncCall(reqres).GetVerifyFraudProof(), cli.Error()
 }

@@ -180,6 +180,11 @@ func (app *PersistentKVStoreApplication) GenerateFraudProof(
 	return types.ResponseGenerateFraudProof{}
 }
 
+func (app *PersistentKVStoreApplication) VerifyFraudProof(
+	req types.RequestVerifyFraudProof) types.ResponseVerifyFraudProof {
+	return types.ResponseVerifyFraudProof{}
+}
+
 //---------------------------------------------
 // update validators
 

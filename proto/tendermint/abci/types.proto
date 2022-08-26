@@ -38,6 +38,7 @@ message Request {
     RequestApplySnapshotChunk apply_snapshot_chunk = 15;
     RequestGetAppHash         get_app_hash         = 16;
     RequestGenerateFraudProof generate_fraud_proof = 17;
+    RequestVerifyFraudProof   verify_fraud_proof   = 18;
   }
 }
 
@@ -136,6 +137,11 @@ message RequestGenerateFraudProof {
   RequestEndBlock end_block_request = 3;
 }
 
+// Verifies a fraud proof
+message RequestVerifyFraudProof {
+  FraudProof fraud_proof = 1;
+}
+
 //----------------------------------------
 // Response types
 
@@ -159,6 +165,7 @@ message Response {
     ResponseApplySnapshotChunk apply_snapshot_chunk = 16;
     ResponseGetAppHash         get_app_hash         = 17;
     ResponseGenerateFraudProof generate_fraud_proof = 18;
+    ResponseVerifyFraudProof   verify_fraud_proof   = 19;
   }
 }
 
@@ -302,6 +309,10 @@ message ResponseGetAppHash {
 
 message ResponseGenerateFraudProof {
   FraudProof fraud_proof = 1;
+}
+
+message ResponseVerifyFraudProof {
+  bool success = 1;
 }
 
 //----------------------------------------
@@ -458,4 +469,5 @@ service ABCIApplication {
       returns (ResponseApplySnapshotChunk);
   rpc GetAppHash(RequestGetAppHash) returns (ResponseGetAppHash);
   rpc GenerateFraudProof(RequestGenerateFraudProof) returns (ResponseGenerateFraudProof);
+  rpc VerifyFraudProof(RequestVerifyFraudProof) returns (ResponseVerifyFraudProof);
 }

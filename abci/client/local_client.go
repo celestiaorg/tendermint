@@ -229,6 +229,17 @@ func (app *localClient) GenerateFraudProofAsync(req types.RequestGenerateFraudPr
 	)
 }
 
+func (app *localClient) VerifyFraudProofAsync(req types.RequestVerifyFraudProof) *ReqRes {
+	app.mtx.Lock()
+	defer app.mtx.Unlock()
+
+	res := app.Application.VerifyFraudProof(req)
+	return app.callback(
+		types.ToRequestVerifyFraudProof(req),
+		types.ToResponseVerifyFraudProof(res),
+	)
+}
+
 //-------------------------------------------------------
 
 func (app *localClient) FlushSync() error {
@@ -360,6 +371,15 @@ func (app *localClient) GenerateFraudProofSync(
 	defer app.mtx.Unlock()
 
 	res := app.Application.GenerateFraudProof(req)
+	return &res, nil
+}
+
+func (app *localClient) VerifyFraudProofSync(
+	req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	app.mtx.Lock()
+	defer app.mtx.Unlock()
+
+	res := app.Application.VerifyFraudProof(req)
 	return &res, nil
 }
 

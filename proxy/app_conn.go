@@ -22,6 +22,7 @@ type AppConnConsensus interface {
 	CommitSync() (*types.ResponseCommit, error)
 	GetAppHashSync(types.RequestGetAppHash) (*types.ResponseGetAppHash, error)
 	GenerateFraudProofSync(types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error)
+	VerifyFraudProofSync(types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error)
 }
 
 type AppConnMempool interface {
@@ -103,6 +104,10 @@ func (app *appConnConsensus) GenerateFraudProofSync(
 	req types.RequestGenerateFraudProof,
 ) (*types.ResponseGenerateFraudProof, error) {
 	return app.appConn.GenerateFraudProofSync(req)
+}
+
+func (app *appConnConsensus) VerifyFraudProofSync(req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	return app.appConn.VerifyFraudProofSync(req)
 }
 
 //------------------------------------------------

@@ -445,6 +445,15 @@ func (cli *socketClient) GenerateFraudProofSync(
 	return reqres.Response.GetGenerateFraudProof(), cli.Error()
 }
 
+func (cli *socketClient) VerifyFraudProofSync(
+	req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	reqres := cli.queueRequest(types.ToRequestVerifyFraudProof(req))
+	if err := cli.FlushSync(); err != nil {
+		return nil, err
+	}
+	return reqres.Response.GetVerifyFraudProof(), cli.Error()
+}
+
 //----------------------------------------
 
 func (cli *socketClient) queueRequest(req *types.Request) *ReqRes {
