@@ -140,6 +140,7 @@ message RequestGenerateFraudProof {
 // Verifies a fraud proof
 message RequestVerifyFraudProof {
   FraudProof fraud_proof = 1;
+  bytes expected_app_hash = 2;
 }
 
 //----------------------------------------
