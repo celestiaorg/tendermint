@@ -16,7 +16,7 @@ require (
 	github.com/gorilla/websocket v1.5.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
-	github.com/lib/pq v1.10.6
+	github.com/lib/pq v1.10.7
 	github.com/libp2p/go-buffer-pool v0.1.0
 	github.com/mroth/weightedrand v0.4.1
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20210609091139-0a56a4bca00b
@@ -246,6 +246,4 @@ require (
 	github.com/syndtr/goleveldb v1.0.1-0.20200815110645-5c35d600f0ca
 )
 
-retract (
-	[v0.35.0,v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
-)
+retract [v0.35.0, v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
