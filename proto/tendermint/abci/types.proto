@@ -131,9 +131,9 @@ message RequestGetAppHash {}
 
 // Generates a fraud proof
 message RequestGenerateFraudProof {
-  RequestBeginBlock beginBlockRequest = 1 [(gogoproto.nullable) = false];
-  repeated RequestDeliverTx deliverTxRequests = 2;
-  RequestEndBlock endBlockRequest = 3;
+  RequestBeginBlock begin_block_request = 1 [(gogoproto.nullable) = false];
+  repeated RequestDeliverTx deliver_tx_requests = 2;
+  RequestEndBlock end_block_request = 3;
 }
 
 //----------------------------------------
