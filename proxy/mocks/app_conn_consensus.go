@@ -99,6 +99,75 @@ func (_m *AppConnConsensus) EndBlockSync(_a0 types.RequestEndBlock) (*types.Resp
 	return r0, r1
 }
 
+// GetAppHashSync provides a mock function with given fields: _a0
+func (_m *AppConnConsensus) GetAppHashSync(_a0 types.RequestGetAppHash) (*types.ResponseGetAppHash, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *types.ResponseGetAppHash
+	if rf, ok := ret.Get(0).(func(types.RequestGetAppHash) *types.ResponseGetAppHash); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*types.ResponseGetAppHash)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(types.RequestGetAppHash) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GenerateFraudProofSync provides a mock function with given fields: _a0
+func (_m *AppConnConsensus) GenerateFraudProofSync(_a0 types.RequestGenerateFraudProof) (*types.ResponseGenerateFraudProof, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *types.ResponseGenerateFraudProof
+	if rf, ok := ret.Get(0).(func(types.RequestGenerateFraudProof) *types.ResponseGenerateFraudProof); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*types.ResponseGenerateFraudProof)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(types.RequestGenerateFraudProof) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// VerifyFraudProofSync provides a mock function with given fields: _a0
+func (_m *AppConnConsensus) VerifyFraudProofSync(_a0 types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+	ret := _m.Called(_a0)
+
+	var r0 *types.ResponseVerifyFraudProof
+	if rf, ok := ret.Get(0).(func(types.RequestVerifyFraudProof) *types.ResponseVerifyFraudProof); ok {
+		r0 = rf(_a0)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*types.ResponseVerifyFraudProof)
+		}
+	}
+
+	var r1 error
+	if rf, ok := ret.Get(1).(func(types.RequestVerifyFraudProof) error); ok {
+		r1 = rf(_a0)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // Error provides a mock function with given fields:
 func (_m *AppConnConsensus) Error() error {
 	ret := _m.Called()
