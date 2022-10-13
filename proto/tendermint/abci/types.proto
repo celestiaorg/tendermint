@@ -429,9 +429,9 @@ message FraudProof {
   bytes app_hash = 2;
   map<string, StateWitness> state_witness = 3;
 
-  RequestBeginBlock fraudulentBeginBlock = 4;
-  RequestDeliverTx fraudulentDeliverTx = 5;
-  RequestEndBlock fraudulentEndBlock = 6;
+  RequestBeginBlock fraudulent_begin_block = 4;
+  RequestDeliverTx fraudulent_deliver_tx = 5;
+  RequestEndBlock fraudulent_end_block = 6;
 }
 
 // State witness with a list of all witness data

@@ -106,7 +106,9 @@ func (app *appConnConsensus) GenerateFraudProofSync(
 	return app.appConn.GenerateFraudProofSync(req)
 }
 
-func (app *appConnConsensus) VerifyFraudProofSync(req types.RequestVerifyFraudProof) (*types.ResponseVerifyFraudProof, error) {
+func (app *appConnConsensus) VerifyFraudProofSync(
+	req types.RequestVerifyFraudProof,
+) (*types.ResponseVerifyFraudProof, error) {
 	return app.appConn.VerifyFraudProofSync(req)
 }
 

@@ -18,20 +18,34 @@ type Application interface {
 	CheckTx(RequestCheckTx) ResponseCheckTx // Validate a tx for the mempool
 
 	// Consensus Connection
-	InitChain(RequestInitChain) ResponseInitChain                            // Initialize blockchain w validators/other info from TendermintCore
-	BeginBlock(RequestBeginBlock) ResponseBeginBlock                         // Signals the beginning of a block
-	DeliverTx(RequestDeliverTx) ResponseDeliverTx                            // Deliver a tx for full processing
-	EndBlock(RequestEndBlock) ResponseEndBlock                               // Signals the end of a block, returns changes to the validator set
-	Commit() ResponseCommit                                                  // Commit the state and return the application Merkle root hash
-	GetAppHash(RequestGetAppHash) ResponseGetAppHash                         // Get appHash
-	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof // Generate Fraud Proof
-	VerifyFraudProof(RequestVerifyFraudProof) ResponseVerifyFraudProof       // Verifies a Fraud Proof
+
+	// Initialize blockchain w validators/other info from TendermintCore
+	InitChain(RequestInitChain) ResponseInitChain
+	// Signals the beginning of a block
+	BeginBlock(RequestBeginBlock) ResponseBeginBlock
+	// Deliver a tx for full processing
+	DeliverTx(RequestDeliverTx) ResponseDeliverTx
+	// Signals the end of a block, returns changes to the validator set
+	EndBlock(RequestEndBlock) ResponseEndBlock
+	// Commit the state and return the application Merkle root hash
+	Commit() ResponseCommit
+	// Get appHash
+	GetAppHash(RequestGetAppHash) ResponseGetAppHash
+	// Generate Fraud Proof
+	GenerateFraudProof(RequestGenerateFraudProof) ResponseGenerateFraudProof
+	// Verifies a Fraud Proof
+	VerifyFraudProof(RequestVerifyFraudProof) ResponseVerifyFraudProof
 
 	// State Sync Connection
-	ListSnapshots(RequestListSnapshots) ResponseListSnapshots                // List available snapshots
-	OfferSnapshot(RequestOfferSnapshot) ResponseOfferSnapshot                // Offer a snapshot to the application
-	LoadSnapshotChunk(RequestLoadSnapshotChunk) ResponseLoadSnapshotChunk    // Load a snapshot chunk
-	ApplySnapshotChunk(RequestApplySnapshotChunk) ResponseApplySnapshotChunk // Apply a shapshot chunk
+
+	// List available snapshots
+	ListSnapshots(RequestListSnapshots) ResponseListSnapshots
+	// Offer a snapshot to the application
+	OfferSnapshot(RequestOfferSnapshot) ResponseOfferSnapshot
+	// Load a snapshot chunk
+	LoadSnapshotChunk(RequestLoadSnapshotChunk) ResponseLoadSnapshotChunk
+	// Apply a shapshot chunk
+	ApplySnapshotChunk(RequestApplySnapshotChunk) ResponseApplySnapshotChunk
 }
 
 //-------------------------------------------------------
