@@ -446,9 +446,16 @@ message StateWitness {
 
 // Witness data containing a key/value pair and a Merkle proof for said key/value pair
 message WitnessData {
-  bytes key = 1;
-  bytes value = 2;
-  tendermint.crypto.ProofOp proof = 3;
+  Operation operation = 1;
+  bytes key = 2;
+  bytes value = 3;
+  repeated tendermint.crypto.ProofOp proofs = 4;
+}
+
+enum Operation {
+   WRITE     = 0 [(gogoproto.enumvalue_customname) = "write"];
+   READ      = 1 [(gogoproto.enumvalue_customname) = "read"];
+   DELETE    = 2 [(gogoproto.enumvalue_customname) = "delete"];
 }
 
 //----------------------------------------
