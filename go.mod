@@ -21,7 +21,7 @@ require (
 	github.com/mroth/weightedrand v0.4.1
 	github.com/oasisprotocol/curve25519-voi v0.0.0-20210609091139-0a56a4bca00b
 	github.com/ory/dockertest v3.3.5+incompatible
-	github.com/prometheus/client_golang v1.12.2
+	github.com/prometheus/client_golang v1.13.0
 	github.com/rs/cors v1.8.2
 	github.com/rs/zerolog v1.27.0
 	github.com/snikch/goodman v0.0.0-20171125024755-10e37e294daa
@@ -30,8 +30,8 @@ require (
 	github.com/stretchr/testify v1.8.0
 	github.com/tendermint/tm-db v0.6.6
 	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
-	golang.org/x/net v0.0.0-20220617184016-355a448f1bc9
-	golang.org/x/sync v0.0.0-20220513210516-0976fa681c29
+	golang.org/x/net v0.0.0-20220805013720-a33c5aa5df48
+	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f
 	google.golang.org/grpc v1.48.0
 	pgregory.net/rapid v0.4.8
 )
@@ -156,7 +156,7 @@ require (
 	github.com/mattn/go-colorable v0.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
+	github.com/matttproud/golang_protobuf_extensions v1.0.2 // indirect
 	github.com/mbilski/exhaustivestruct v1.2.0 // indirect
 	github.com/mgechev/revive v1.2.1 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -178,7 +178,7 @@ require (
 	github.com/pkg/profile v1.6.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/polyfloyd/go-errorlint v1.0.0 // indirect
-	github.com/prometheus/procfs v0.7.3 // indirect
+	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/quasilyte/go-ruleguard v0.3.16-0.20220213074421-6aa060fab41a // indirect
 	github.com/quasilyte/gogrep v0.0.0-20220120141003-628d8b3623b5 // indirect
 	github.com/quasilyte/regex/syntax v0.0.0-20200407221936-30656e2c4a95 // indirect
@@ -223,12 +223,12 @@ require (
 	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20220613132600-b0d781184e0d // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
-	golang.org/x/sys v0.0.0-20220702020025-31831981b65f // indirect
+	golang.org/x/sys v0.0.0-20220728004956-3c1f35247d10 // indirect
 	golang.org/x/term v0.0.0-20220526004731-065cf7ba2467 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/tools v0.1.12-0.20220628192153-7743d1d949f1 // indirect
 	google.golang.org/genproto v0.0.0-20220519153652-3a47de7e79bd // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/ini.v1 v1.66.6 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
@@ -242,10 +242,8 @@ require (
 require (
 	github.com/creachadair/tomledit v0.0.23
 	github.com/prometheus/client_model v0.2.0
-	github.com/prometheus/common v0.37.0
+	github.com/prometheus/common v0.38.0
 	github.com/syndtr/goleveldb v1.0.1-0.20200815110645-5c35d600f0ca
 )
 
-retract (
-	[v0.35.0,v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
-)
+retract [v0.35.0, v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
