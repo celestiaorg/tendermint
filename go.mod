@@ -51,6 +51,10 @@ require (
 
 require github.com/btcsuite/btcd/btcec/v2 v2.1.3
 
+replace (
+	github.com/btcsuite/btcd => ../btcsuite/btcd
+)
+
 require (
 	4d63.com/gochecknoglobals v0.1.0 // indirect
 	github.com/Antonboom/errname v0.1.7 // indirect
