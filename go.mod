@@ -3,7 +3,7 @@ module github.com/tendermint/tendermint
 go 1.17
 
 require (
-	github.com/BurntSushi/toml v1.2.0
+	github.com/BurntSushi/toml v1.2.1
 	github.com/adlio/schema v1.3.3
 	github.com/btcsuite/btcd v0.22.1
 	github.com/btcsuite/btcutil v1.0.3-0.20201208143702-a53e38424cce
@@ -246,6 +246,4 @@ require (
 	github.com/syndtr/goleveldb v1.0.1-0.20200815110645-5c35d600f0ca
 )
 
-retract (
-	[v0.35.0,v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
-)
+retract [v0.35.0, v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
