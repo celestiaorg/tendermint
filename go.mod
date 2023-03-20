@@ -38,7 +38,7 @@ require (
 
 require (
 	github.com/bufbuild/buf v1.4.0
-	github.com/creachadair/atomicfile v0.2.6
+	github.com/creachadair/atomicfile v0.2.7
 	github.com/creachadair/taskgroup v0.3.2
 	github.com/golangci/golangci-lint v1.47.2
 	github.com/google/go-cmp v0.5.8
@@ -240,12 +240,10 @@ require (
 )
 
 require (
-	github.com/creachadair/tomledit v0.0.23
+	github.com/creachadair/tomledit v0.0.24
 	github.com/prometheus/client_model v0.2.0
 	github.com/prometheus/common v0.37.0
 	github.com/syndtr/goleveldb v1.0.1-0.20200815110645-5c35d600f0ca
 )
 
-retract (
-	[v0.35.0,v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
-)
+retract [v0.35.0, v0.35.9] // See https://github.com/tendermint/tendermint/discussions/9155
