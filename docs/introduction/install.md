@@ -6,7 +6,7 @@ order: 3
 
 ## From Binary
 
-To download pre-built binaries, see the [releases page](https://github.com/tendermint/tendermint/releases).
+To download pre-built binaries, see the [releases page](https://github.com/cometbft/cometbft/releases).
 
 ## From Source
 

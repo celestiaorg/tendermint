@@ -7,8 +7,8 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/tendermint/tendermint/abci/types"
-	tmnet "github.com/tendermint/tendermint/libs/net"
+	"github.com/cometbft/cometbft/abci/types"
+	tmnet "github.com/cometbft/cometbft/libs/net"
 )
 
 func main() {

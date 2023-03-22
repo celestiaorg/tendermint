@@ -1,13 +1,13 @@
 package proxy
 
 import (
-	"github.com/tendermint/tendermint/libs/bytes"
-	lrpc "github.com/tendermint/tendermint/light/rpc"
-	rpcclient "github.com/tendermint/tendermint/rpc/client"
-	ctypes "github.com/tendermint/tendermint/rpc/core/types"
-	rpcserver "github.com/tendermint/tendermint/rpc/jsonrpc/server"
-	rpctypes "github.com/tendermint/tendermint/rpc/jsonrpc/types"
-	"github.com/tendermint/tendermint/types"
+	"github.com/cometbft/cometbft/libs/bytes"
+	lrpc "github.com/cometbft/cometbft/light/rpc"
+	rpcclient "github.com/cometbft/cometbft/rpc/client"
+	ctypes "github.com/cometbft/cometbft/rpc/core/types"
+	rpcserver "github.com/cometbft/cometbft/rpc/jsonrpc/server"
+	rpctypes "github.com/cometbft/cometbft/rpc/jsonrpc/types"
+	"github.com/cometbft/cometbft/types"
 )
 
 func RPCRoutes(c *lrpc.Client) map[string]*rpcserver.RPCFunc {
@@ -62,7 +62,7 @@ func makeHealthFunc(c *lrpc.Client) rpcHealthFunc {
 
 type rpcStatusFunc func(ctx *rpctypes.Context) (*ctypes.ResultStatus, error)
 
-//nolint: interfacer
+// nolint: interfacer
 func makeStatusFunc(c *lrpc.Client) rpcStatusFunc {
 	return func(ctx *rpctypes.Context) (*ctypes.ResultStatus, error) {
 		return c.Status(ctx.Context())
@@ -278,7 +278,7 @@ func makeABCIInfoFunc(c *lrpc.Client) rpcABCIInfoFunc {
 
 type rpcBroadcastEvidenceFunc func(ctx *rpctypes.Context, ev types.Evidence) (*ctypes.ResultBroadcastEvidence, error)
 
-//nolint: interfacer
+// nolint: interfacer
 func makeBroadcastEvidenceFunc(c *lrpc.Client) rpcBroadcastEvidenceFunc {
 	return func(ctx *rpctypes.Context, ev types.Evidence) (*ctypes.ResultBroadcastEvidence, error) {
 		return c.BroadcastEvidence(ctx.Context(), ev)

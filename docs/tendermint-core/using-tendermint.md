@@ -39,7 +39,7 @@ tendermint testnet --help
 
 The `genesis.json` file in `$TMHOME/config/` defines the initial
 TendermintCore state upon genesis of the blockchain ([see
-definition](https://github.com/tendermint/tendermint/blob/master/types/genesis.go)).
+definition](https://github.com/cometbft/cometbft/blob/master/types/genesis.go)).
 
 #### Fields
 
@@ -568,7 +568,7 @@ library will deny making connections to peers with the same IP address.
 ### Upgrading
 
 See the
-[UPGRADING.md](https://github.com/tendermint/tendermint/blob/v0.34.x/UPGRADING.md)
+[UPGRADING.md](https://github.com/cometbft/cometbft/blob/v0.34.x/UPGRADING.md)
 guide. You may need to reset your chain between major breaking releases.
 Although, we expect Tendermint to have fewer breaking releases in the future
 (especially after 1.0 release).

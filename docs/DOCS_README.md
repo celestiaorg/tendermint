@@ -5,7 +5,7 @@ The documentation for Tendermint Core is hosted at:
 - <https://docs.tendermint.com/master/>
 
 built from the files in this (`/docs`) directory for
-[master](https://github.com/tendermint/tendermint/tree/master/docs) respectively.
+[master](https://github.com/cometbft/cometbft/tree/master/docs) respectively.
 
 ## How It Works
 

@@ -8,11 +8,11 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/tendermint/tendermint/abci/types"
-	tmlog "github.com/tendermint/tendermint/libs/log"
-	tmnet "github.com/tendermint/tendermint/libs/net"
-	"github.com/tendermint/tendermint/libs/service"
-	tmsync "github.com/tendermint/tendermint/libs/sync"
+	"github.com/cometbft/cometbft/abci/types"
+	tmlog "github.com/cometbft/cometbft/libs/log"
+	tmnet "github.com/cometbft/cometbft/libs/net"
+	"github.com/cometbft/cometbft/libs/service"
+	tmsync "github.com/cometbft/cometbft/libs/sync"
 )
 
 // var maxNumberConnections = 2

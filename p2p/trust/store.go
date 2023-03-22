@@ -10,8 +10,8 @@ import (
 
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/tendermint/tendermint/libs/service"
-	tmsync "github.com/tendermint/tendermint/libs/sync"
+	"github.com/cometbft/cometbft/libs/service"
+	tmsync "github.com/cometbft/cometbft/libs/sync"
 )
 
 const defaultStorePeriodicSaveInterval = 1 * time.Minute

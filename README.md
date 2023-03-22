@@ -6,17 +6,17 @@
 [State Machines](https://en.wikipedia.org/wiki/State_machine_replication).
 Or [Blockchain](<https://en.wikipedia.org/wiki/Blockchain_(database)>), for short.
 
-[![version](https://img.shields.io/github/tag/tendermint/tendermint.svg)](https://github.com/tendermint/tendermint/releases/latest)
+[![version](https://img.shields.io/github/tag/tendermint/tendermint.svg)](https://github.com/cometbft/cometbft/releases/latest)
 [![API Reference](https://camo.githubusercontent.com/915b7be44ada53c290eb157634330494ebe3e30a/68747470733a2f2f676f646f632e6f72672f6769746875622e636f6d2f676f6c616e672f6764646f3f7374617475732e737667)](https://pkg.go.dev/github.com/tendermint/tendermint)
 [![Go version](https://img.shields.io/badge/go-1.15-blue.svg)](https://github.com/moovweb/gvm)
 [![Discord chat](https://img.shields.io/discord/669268347736686612.svg)](https://discord.gg/AzefAFd)
-[![license](https://img.shields.io/github/license/tendermint/tendermint.svg)](https://github.com/tendermint/tendermint/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/tendermint/tendermint.svg)](https://github.com/cometbft/cometbft/blob/master/LICENSE)
 [![tendermint/tendermint](https://tokei.rs/b1/github/tendermint/tendermint?category=lines)](https://github.com/tendermint/tendermint)
-[![Sourcegraph](https://sourcegraph.com/github.com/tendermint/tendermint/-/badge.svg)](https://sourcegraph.com/github.com/tendermint/tendermint?badge)
+[![Sourcegraph](https://sourcegraph.com/github.com/cometbft/cometbft/-/badge.svg)](https://sourcegraph.com/github.com/tendermint/tendermint?badge)
 
 | Branch | Tests                                                                                                                                                                                                                                                  | Coverage                                                                                                                             | Linting                                                                    |
 | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| master | [![CircleCI](https://circleci.com/gh/tendermint/tendermint/tree/master.svg?style=shield)](https://circleci.com/gh/tendermint/tendermint/tree/master) </br> ![Tests](https://github.com/tendermint/tendermint/workflows/Tests/badge.svg?branch=master) | [![codecov](https://codecov.io/gh/tendermint/tendermint/branch/master/graph/badge.svg)](https://codecov.io/gh/tendermint/tendermint) | ![Lint](https://github.com/tendermint/tendermint/workflows/Lint/badge.svg) |
+| master | [![CircleCI](https://circleci.com/gh/cometbft/cometbft/tree/master.svg?style=shield)](https://circleci.com/gh/cometbft/cometbft/tree/master) </br> ![Tests](https://github.com/cometbft/cometbft/workflows/Tests/badge.svg?branch=master) | [![codecov](https://codecov.io/gh/cometbft/cometbft/branch/master/graph/badge.svg)](https://codecov.io/gh/tendermint/tendermint) | ![Lint](https://github.com/cometbft/cometbft/workflows/Lint/badge.svg) |
 
 Tendermint Core is Byzantine Fault Tolerant (BFT) middleware that takes a state transition machine - written in any programming language -
 and securely replicates it on many machines.
@@ -28,7 +28,7 @@ see our recent paper, "[The latest gossip on BFT consensus](https://arxiv.org/ab
 
 ## Releases
 
-Please do not depend on master as your production branch. Use [releases](https://github.com/tendermint/tendermint/releases) instead.
+Please do not depend on master as your production branch. Use [releases](https://github.com/cometbft/cometbft/releases) instead.
 
 Tendermint is being used in production in both private and public environments,
 most notably the blockchains of the [Cosmos Network](https://cosmos.network/).
@@ -76,7 +76,7 @@ Before contributing to the project, please take a look at the [contributing guid
 and the [style guide](STYLE_GUIDE.md). You may also find it helpful to read the
 [specifications](https://github.com/tendermint/spec), watch the [Developer Sessions](/docs/DEV_SESSIONS.md), 
 and familiarize yourself with our
-[Architectural Decision Records](https://github.com/tendermint/tendermint/tree/master/docs/architecture).
+[Architectural Decision Records](https://github.com/cometbft/cometbft/tree/master/docs/architecture).
 
 ## Versioning
 

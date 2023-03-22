@@ -15,7 +15,7 @@ and gas cost).
 Operators can enable the priority mempool by setting `mempool.version` to
 `"v1"` in the `config.toml`. For more technical details about the priority
 mempool, see [ADR 067: Mempool
-Refactor](https://github.com/tendermint/tendermint/blob/master/docs/architecture/adr-067-mempool-refactor.md).
+Refactor](https://github.com/cometbft/cometbft/blob/master/docs/architecture/adr-067-mempool-refactor.md).
 
 ## v0.34.0
 
@@ -49,7 +49,7 @@ Note also that Tendermint 0.34 also requires Go 1.15 or higher.
   Applications should be able to handle these evidence types
   (i.e., through slashing or other accountability measures).
 
-* The [`PublicKey` type](https://github.com/tendermint/tendermint/blob/master/proto/tendermint/crypto/keys.proto#L13-L15)
+* The [`PublicKey` type](https://github.com/cometbft/cometbft/blob/master/proto/tendermint/crypto/keys.proto#L13-L15)
   (used in ABCI as part of `ValidatorUpdate`) now uses a `oneof` protobuf type.
   Note that since Tendermint only supports ed25519 validator keys, there's only one
   option in the `oneof`.  For more, see "Protocol Buffers," below.
@@ -181,7 +181,7 @@ Other user-relevant changes include:
 * A new field `State.InitialHeight` has been added to record the initial chain height, which must be `1`
   (not `0`) if starting from height `1`. This can be configured via the genesis field `initial_height`.
 * The `state` package now has a `Store` interface. All functions in
-  [state/store.go](https://github.com/tendermint/tendermint/blob/56911ee35298191c95ef1c7d3d5ec508237aaff4/state/store.go#L42-L42)
+  [state/store.go](https://github.com/cometbft/cometbft/blob/56911ee35298191c95ef1c7d3d5ec508237aaff4/state/store.go#L42-L42)
   are now part of the interface. The interface returns errors on all methods and can be used by calling `state.NewStore(dbm.DB)`.
 
 ### `privval` Package
@@ -208,7 +208,7 @@ Version is now set through Go linker flags `ld_flags`. Applications that are usi
 Example:
 
 ```sh
-go install -mod=readonly -ldflags "-X github.com/tendermint/tendermint/version.TMCoreSemVer=$(go list -m github.com/tendermint/tendermint | sed  's/ /\@/g') -s -w " -trimpath ./cmd
+go install -mod=readonly -ldflags "-X github.com/cometbft/cometbft/version.TMCoreSemVer=$(go list -m github.com/tendermint/tendermint | sed  's/ /\@/g') -s -w " -trimpath ./cmd
 ```
 
 Additionally, the exported constant `version.Version` is now `version.TMCoreSemVer`.
@@ -285,7 +285,7 @@ change.
 The secret connection now includes a transcript hashing. If you want to
 implement a handshake (or otherwise have an existing implementation), you'll
 need to make the same changes that were made
-[here](https://github.com/tendermint/tendermint/pull/3668).
+[here](https://github.com/cometbft/cometbft/pull/3668).
 
 ### Config Changes
 
@@ -293,7 +293,7 @@ You will need to generate a new config if you have used a prior version of tende
 
 Tags have been entirely renamed throughout the codebase to events and there
 keys are called
-[compositeKeys](https://github.com/tendermint/tendermint/blob/6d05c531f7efef6f0619155cf10ae8557dd7832f/docs/app-dev/indexing-transactions.md).
+[compositeKeys](https://github.com/cometbft/cometbft/blob/6d05c531f7efef6f0619155cf10ae8557dd7832f/docs/app-dev/indexing-transactions.md).
 
 Evidence Params has been changed to include duration.
 
@@ -417,7 +417,7 @@ query.MustParse("tm.event = 'Tx' AND transfer.recipient = 'bar'")
 query.MustParse("tm.event = 'Tx' AND transfer.sender = 'foo' AND transfer.recipient = 'bar'")
 ```
 
-For further documentation on `Events`, see the [docs](https://github.com/tendermint/tendermint/blob/60827f75623b92eff132dc0eff5b49d2025c591e/docs/spec/abci/abci.md#events).
+For further documentation on `Events`, see the [docs](https://github.com/cometbft/cometbft/blob/60827f75623b92eff132dc0eff5b49d2025c591e/docs/spec/abci/abci.md#events).
 
 ### Go Applications
 
@@ -519,7 +519,7 @@ will need to be updated. For specific details:
 
 Finally, the proposer selection algorithm continues to evolve. See the
 [work-in-progress
-specification](https://github.com/tendermint/tendermint/pull/3140).
+specification](https://github.com/cometbft/cometbft/pull/3140).
 
 For everything else, please see the [CHANGELOG](./CHANGELOG.md#v0.29.0).
 
@@ -568,9 +568,9 @@ for consistency with other messages.
 
 Note that the TCP sockets don't yet use a persistent key,
 so while they're encrypted, they can't yet be properly authenticated.
-See [#3105](https://github.com/tendermint/tendermint/issues/3105).
+See [#3105](https://github.com/cometbft/cometbft/issues/3105).
 Note the Unix socket has neither encryption nor authentication, but will
-add a shared-secret in [#3099](https://github.com/tendermint/tendermint/issues/3099).
+add a shared-secret in [#3099](https://github.com/cometbft/cometbft/issues/3099).
 
 ## v0.27.0
 
@@ -669,11 +669,11 @@ just the `Data` field set:
 
 For more information, see:
 
-* [ADR-026](https://github.com/tendermint/tendermint/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/docs/architecture/adr-026-general-merkle-proof.md)
+* [ADR-026](https://github.com/cometbft/cometbft/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/docs/architecture/adr-026-general-merkle-proof.md)
 * [Relevant ABCI
-  documentation](https://github.com/tendermint/tendermint/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/docs/spec/abci/apps.md#query-proofs)
+  documentation](https://github.com/cometbft/cometbft/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/docs/spec/abci/apps.md#query-proofs)
 * [Description of
-  keys](https://github.com/tendermint/tendermint/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/crypto/merkle/proof_key_path.go#L14)
+  keys](https://github.com/cometbft/cometbft/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/crypto/merkle/proof_key_path.go#L14)
 
 ### Go API Changes
 
@@ -687,7 +687,7 @@ serialized before they are passed in.
 
 The `node.RunForever` function was removed. Signal handling and running forever
 should instead be explicitly configured by the caller. See how we do it
-[here](https://github.com/tendermint/tendermint/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/cmd/tendermint/commands/run_node.go#L60).
+[here](https://github.com/cometbft/cometbft/blob/30519e8361c19f4bf320ef4d26288ebc621ad725/cmd/tendermint/commands/run_node.go#L60).
 
 ### Other
 

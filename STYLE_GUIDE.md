@@ -77,12 +77,12 @@ Sometimes it's necessary to rename libraries to avoid naming collisions or ambig
 * Separate imports into blocks - one for the standard lib, one for external libs and one for application libs.
 * Here are some common library labels for consistency:
     * dbm "github.com/tendermint/tm-db"
-    * tmcmd "github.com/tendermint/tendermint/cmd/tendermint/commands"
-    * tmcfg "github.com/tendermint/tendermint/config/tendermint"
-    * tmtypes "github.com/tendermint/tendermint/types"
+    * tmcmd "github.com/cometbft/cometbft/cmd/tendermint/commands"
+    * tmcfg "github.com/cometbft/cometbft/config/tendermint"
+    * tmtypes "github.com/cometbft/cometbft/types"
 * Never use anonymous imports (the `.`), for example, `tmlibs/common` or anything else.
 * When importing a pkg from the `tendermint/libs` directory, prefix the pkg alias with tm.
-    * tmbits "github.com/tendermint/tendermint/libs/bits"
+    * tmbits "github.com/cometbft/cometbft/libs/bits"
 * tip: Use the `_` library import to import a library for initialization effects (side effects)
 
 ## Dependencies
