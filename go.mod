@@ -30,18 +30,18 @@ require (
 	github.com/prometheus/client_golang v1.12.1
 	github.com/rcrowley/go-metrics v0.0.0-20200313005456-10cdbea86bc0
 	github.com/rs/cors v1.8.2
-	github.com/rs/zerolog v1.26.1
+	github.com/rs/zerolog v1.29.0
 	github.com/sasha-s/go-deadlock v0.2.1-0.20190427202633-1595213edefa
 	github.com/snikch/goodman v0.0.0-20171125024755-10e37e294daa
-	github.com/spf13/cobra v1.4.0
-	github.com/spf13/viper v1.10.1
-	github.com/stretchr/testify v1.7.1
+	github.com/spf13/cobra v1.6.1
+	github.com/spf13/viper v1.15.0
+	github.com/stretchr/testify v1.8.2
 	github.com/tendermint/tm-db v0.6.6
-	github.com/vektra/mockery/v2 v2.10.4
-	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
-	golang.org/x/net v0.0.0-20211208012354-db4efeb81f4b
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
-	google.golang.org/grpc v1.45.0
+	github.com/vektra/mockery/v2 v2.28.2
+	golang.org/x/crypto v0.0.0-20220525230936-793ad666bf5e
+	golang.org/x/net v0.8.0
+	golang.org/x/sync v0.1.0
+	google.golang.org/grpc v1.52.0
 	gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b // indirect
 	pgregory.net/rapid v0.4.7
 )
