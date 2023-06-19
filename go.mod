@@ -38,9 +38,9 @@ require (
 	github.com/stretchr/testify v1.7.1
 	github.com/tendermint/tm-db v0.6.6
 	github.com/vektra/mockery/v2 v2.10.4
-	golang.org/x/crypto v0.0.0-20220214200702-86341886e292
-	golang.org/x/net v0.0.0-20211208012354-db4efeb81f4b
-	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
+	golang.org/x/crypto v0.10.0
+	golang.org/x/net v0.10.0
+	golang.org/x/sync v0.1.0
 	google.golang.org/grpc v1.45.0
 	gopkg.in/check.v1 v1.0.0-20200902074654-038fdea0a05b // indirect
 	pgregory.net/rapid v0.4.7
