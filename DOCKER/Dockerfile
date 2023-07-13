@@ -1,5 +1,5 @@
 # stage 1 Generate Tendermint Binary
-FROM golang:1.17-alpine as builder
+FROM golang:1.19.10-alpine as builder
 RUN apk update && \
     apk upgrade && \
     apk --no-cache add make git
@@ -8,7 +8,7 @@ WORKDIR /tendermint
 RUN make build-linux
 
 # stage 2
-FROM golang:1.17-alpine
+FROM golang:1.19.10-alpine
 LABEL maintainer="hello@tendermint.com"
 
 # Tendermint will be looking for the genesis file in /tendermint/config/genesis.json
